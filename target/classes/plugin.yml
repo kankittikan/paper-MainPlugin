@@ -1,0 +1,100 @@
+name: MainPlugin
+version: '1.0'
+main: me.oyashiz.serverplugin.MainPlugin
+api-version: 1.19
+authors: [ Oyashiz ]
+description: All In One Server Plugin
+commands:
+  sethome:
+    description: Set the server spawn point
+  home:
+    description: Go to server spawn point
+    permission: op
+  ps:
+    description: Play sound
+    permission: op
+  hubLight:
+    description: Turn hub light on and off
+    permission: op
+  createWorld:
+    description: Create void world
+    permission: op
+  loadWorld:
+    description: creating existed extra world
+    permission: op
+  warp:
+    description: player teleport
+    permission: op
+  setInHubLight:
+    description: Control In Hub Light
+    permission: op
+  goControl:
+    permission: op
+  setSpaceshipLight:
+    permission: op
+  setouthublight:
+    permission: op
+  freeze:
+    permission: op
+  unbreak:
+    permission: op
+  spawntest:
+    permission: op
+  clearmonster:
+    permission: op
+  setperforminglevel:
+    permission: op
+  geteffect:
+    permission: op
+  setrocketlight:
+    permission: op
+  lockplayer:
+    permission: op
+  eject:
+    permission: op
+  reloadserver:
+    permission: op
+  playcustom:
+    permission: op
+  test:
+    permission: op
+  savehalllight:
+    permission: op
+  loadlight:
+    permission: op
+  setlightunder:
+    permission: op
+  opensunroof:
+    permission: op
+  psinarea:
+    permission: op
+  timer:
+    permission: op
+  dofirework:
+    permission: op
+  cinemetic:
+    permission: op
+  gorocket:
+    description: go to rocket in survival
+  maintenance:
+    permission: op
+  pa:
+    permission: op
+  testworld:
+    description: go to test world
+  piano:
+    description: eiei
+  showstat:
+    permission: op
+  getdistance:
+    permission: op
+  mapimage:
+    permission: op
+  raytrace:
+    permission: op
+  showstatus:
+    permission: op
+  getram:
+    permission: op
+  restore:
+    permission: op

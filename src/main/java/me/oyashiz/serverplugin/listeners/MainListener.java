@@ -27,36 +27,10 @@ public class MainListener implements Listener {
 
     private SaveInventory saveInventory;
 
-    ScoreboardManager manager = Bukkit.getScoreboardManager();
-    Scoreboard board = manager.getNewScoreboard();
-    Objective objective = board.registerNewObjective("test", "dummy");
-
-    private ArrayList<String> strings = new ArrayList<>();
-
     public MainListener(MainPlugin plugin) {
 
         this.plugin = plugin;
         saveInventory = new SaveInventory(plugin);
-
-        objective.setDisplayName("Player Location");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-    }
-
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
-        if (StaticFlags.lockPlayer == 1 && StaticLists.playerLock.contains(event.getPlayer())) event.setCancelled(true);
-        if (StaticFlags.maintenance) {
-            for (String s : strings) {
-                board.resetScores(s);
-            }
-            strings.clear();
-            for (Player p : StaticLocations.survivalWorld.getPlayers()) {
-                String s = p.getName() + " " + p.getLocation().getBlockX() + " " + p.getLocation().getBlockY() + " " + p.getLocation().getBlockZ();
-                strings.add(s);
-                objective.getScore(s).setScore(0);
-            }
-            ScoreboardPlayer.set(StaticLocations.survivalWorld, board);
-        }
     }
 
     @EventHandler
@@ -89,6 +63,17 @@ public class MainListener implements Listener {
     }
 
     @EventHandler
+    public void playerMove(PlayerMoveEvent event) {
+        if(StaticLists.playerLock.contains(event.getPlayer())) {
+            event.getPlayer().setInvulnerable(true);
+            event.setCancelled(true);
+        }
+        else {
+            event.getPlayer().setInvulnerable(false);
+        }
+    }
+
+    @EventHandler
     public void interactEntity(PlayerInteractEntityEvent event) {
         if (event.getRightClicked() instanceof Player) {
             event.getRightClicked().addPassenger(event.getPlayer());
@@ -107,6 +92,9 @@ public class MainListener implements Listener {
     @EventHandler
     public void playerDrop(PlayerDropItemEvent event) {
         if (StaticFlags.cinematic) event.setCancelled(true);
+        if(StaticLists.playerLock.contains(event.getPlayer())) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler

@@ -1,7 +1,7 @@
 name: MainPlugin
 version: '1.0'
 main: me.oyashiz.serverplugin.MainPlugin
-api-version: 1.19
+api-version: 1.20
 authors: [ Oyashiz ]
 description: All In One Server Plugin
 commands:
@@ -97,4 +97,12 @@ commands:
   getram:
     permission: op
   restore:
+    permission: op
+  password:
+    description: password enter server
+  resetpassword:
+    permission: op
+  allunbreak:
+    permission: op
+  controlplayer:
     permission: op

@@ -10,6 +10,7 @@ import me.oyashiz.serverplugin.listeners.minigame.fukie.level2.Level2Listener;
 import me.oyashiz.serverplugin.listeners.minigame.fukie.level3.Level3Listener;
 import me.oyashiz.serverplugin.listeners.minigame.fukie.level4.Level4Listener;
 import me.oyashiz.serverplugin.listeners.minigame.fukie.level5.Level5Listener;
+import me.oyashiz.serverplugin.tasks.Auth;
 import me.oyashiz.serverplugin.utils.ConfigReader;
 import me.oyashiz.serverplugin.utils.MapManager;
 import me.oyashiz.serverplugin.utils.StaticFlags;
@@ -17,7 +18,9 @@ import me.oyashiz.serverplugin.utils.StaticLocations;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +30,10 @@ public final class MainPlugin extends JavaPlugin {
     public static ConfigReader homeConfig;
     public static ConfigReader lightConfig;
 
+    public static ConfigReader passwordConfig;
+
     public static String resourcePack;
+    public static String testPack;
 
     @Override
     public void onEnable() {
@@ -75,6 +81,12 @@ public final class MainPlugin extends JavaPlugin {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        theDir = new File(getDataFolder().getAbsolutePath() + "/settings/echo.yml");
+        try {
+            theDir.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         theDir = new File(getDataFolder().getAbsolutePath() + "/world_survival/home.yml");
         try {
             theDir.createNewFile();
@@ -94,6 +106,9 @@ public final class MainPlugin extends JavaPlugin {
 
         lightConfig = new ConfigReader(this, "settings/", "lightMatrix.yml");
         lightConfig.saveDefaultConfig();
+
+        passwordConfig = new ConfigReader(this, "settings/", "echo.yml");
+        passwordConfig.saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new JoinAndOutServerListener(this), this);
         getServer().getPluginManager().registerEvents(new SignClickListener(this), this);
@@ -118,6 +133,8 @@ public final class MainPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SpeakaListener(this), this);
         getServer().getPluginManager().registerEvents(new SleepListener(this), this);
         getServer().getPluginManager().registerEvents(new MinecartMoveListener(this), this);
+        getServer().getPluginManager().registerEvents(new AllUnBreakCommand(), this);
+        getServer().getPluginManager().registerEvents(new Auth(), this);
 
         getCommand("sethome").setExecutor(new SetSpawnCommand(this));
         getCommand("geteffect").setExecutor(new GetEffectCommand());
@@ -165,16 +182,22 @@ public final class MainPlugin extends JavaPlugin {
         getCommand("showstatus").setExecutor(new ShowStatusCommand(this));
         getCommand("getram").setExecutor(new RamUsageCommand());
         getCommand("restore").setExecutor(new GiveBackupInventoryCommand(this));
+        getCommand("password").setExecutor(new Auth());
+        getCommand("resetpassword").setExecutor(new ResetPasswordCommand());
+        getCommand("allunbreak").setExecutor(new AllUnBreakCommand());
+        getCommand("controlplayer").setExecutor(new ControlPlayerCommand(this));
 
         World worldCreator;
         worldCreator = new WorldCreator("world_fukie").createWorld();
         worldCreator = new WorldCreator("world_survival").createWorld();
         worldCreator = new WorldCreator("world_star").createWorld();
         worldCreator = new WorldCreator("world_speaka").createWorld();
-        worldCreator = new WorldCreator("tester_world").createWorld();
+        worldCreator = new WorldCreator("world_tester").createWorld();
+        worldCreator = new WorldCreator("world_b147").createWorld();
 
         StaticFlags.performingLevel = getConfig().getInt("performing_level");
         resourcePack = getConfig().getString("resource_pack");
+        testPack = getConfig().getString("test_pack");
 
         StaticLocations.fukieWorld = Bukkit.getServer().getWorld("world_fukie");
         StaticLocations.world = Bukkit.getServer().getWorld("world");
@@ -182,6 +205,31 @@ public final class MainPlugin extends JavaPlugin {
 
         MapManager manager = MapManager.getInstance();
         manager.init();
+
+        new BukkitRunnable() {
+            int count = 0;
+            @Override
+            public void run() {
+                if(Bukkit.getOnlinePlayers().size() == 0) {
+                    if(count == 0) {
+                        Bukkit.getLogger().info("auto stop enabled");
+                    }
+                    count++;
+                }
+                if(Bukkit.getOnlinePlayers().size() != 0 && count != 0) {
+                    Bukkit.getLogger().info("auto stop terminated");
+                    count = 0;
+                }
+                if(count >= 600) {
+                    Bukkit.shutdown();
+                }
+            }
+        }.runTaskTimer(this, 0, 20);
+
+        Auth auth = new Auth();
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            auth.doAuth(p);
+        }
     }
 
 }

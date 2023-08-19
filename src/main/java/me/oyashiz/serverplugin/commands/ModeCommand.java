@@ -15,7 +15,7 @@ public class ModeCommand implements CommandExecutor {
         if(args.length == 1) {
             if(args[0].equals("on")) {
                 for(Player p : Bukkit.getOnlinePlayers()) {
-                    p.playSound(p.getLocation(), "alarm", 0.5f, 1);
+                    p.playSound(p.getLocation(), "alarm", 0.3f, 1);
                     p.sendMessage(ChatColor.GREEN + "Maintenance mode enabled");
                     p.sendMessage(ChatColor.YELLOW + "You may get some spotty connection");
                     StaticFlags.maintenance = true;
@@ -24,7 +24,7 @@ public class ModeCommand implements CommandExecutor {
             }
             if(args[0].equals("off")) {
                 for(Player p : Bukkit.getOnlinePlayers()) {
-                    p.playSound(p.getLocation(), "alarm", 0.5f, 1);
+                    p.playSound(p.getLocation(), "alarm", 0.3f, 1);
                     p.sendMessage(ChatColor.GREEN + "Maintenance mode disabled");
                     StaticFlags.maintenance = false;
                 }

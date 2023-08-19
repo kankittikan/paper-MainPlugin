@@ -1,5 +1,6 @@
 package me.oyashiz.serverplugin.commands;
 
+import net.kyori.adventure.sound.Sound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -27,7 +28,6 @@ public class AnnouncementCommand implements CommandExecutor {
             for (int i = 0; i < strings.size(); i++) {
                 player1.sendMessage(i + 1 + ".) " + strings.get(i));
             }
-            player1.sendMessage(" ");
             player1.playSound(player1.getLocation(), "pa", 0.2f, 1);
         }
         return false;

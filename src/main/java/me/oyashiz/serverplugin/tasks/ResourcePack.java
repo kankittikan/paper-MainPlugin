@@ -14,6 +14,10 @@ public class ResourcePack {
         player.setResourcePack(MainPlugin.resourcePack, null, (Component) null, true);
     }
 
+    public static void setTest(Player player) {
+        player.setResourcePack(MainPlugin.testPack, null, (Component) null, true);
+    }
+
     public static void setAll() {
         SendMsg.sendList((List<Player>) Bukkit.getOnlinePlayers(), "Reloading resource pack");
         for (Player p : Bukkit.getOnlinePlayers()) {

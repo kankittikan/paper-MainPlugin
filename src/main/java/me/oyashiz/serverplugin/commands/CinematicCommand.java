@@ -320,15 +320,9 @@ public class CinematicCommand implements CommandExecutor {
                                                                                                                                                                                                                                 cancel();
                                                                                                                                                                                                                                 player.teleport(new Location(StaticLocations.world, 0, 7, 88));
                                                                                                                                                                                                                                 player.sendTitle("Welcome", "Doksakura Server");
-                                                                                                                                                                                                                                BukkitTask task = new BukkitRunnable() {
-                                                                                                                                                                                                                                    @Override
-                                                                                                                                                                                                                                    public void run() {
-                                                                                                                                                                                                                                        player.sendTitle("Happy Birthday", "Emma8956");
-                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                }.runTaskLater(plugin, 50);
 
                                                                                                                                                                                                                                 player.stopAllSounds();
-                                                                                                                                                                                                                                player.playSound(player.getLocation(), "hbd", 0.1f, 1);
+                                                                                                                                                                                                                                player.playSound(player.getLocation(), "tuu", 0.1f, 1);
                                                                                                                                                                                                                                 spaceshipLightCommand.setLight("off");
                                                                                                                                                                                                                                 outHubLightCommand.setLight("off");
                                                                                                                                                                                                                                 player.setInvisible(false);
@@ -340,6 +334,7 @@ public class CinematicCommand implements CommandExecutor {
                                                                                                                                                                                                                                     @Override
                                                                                                                                                                                                                                     public void run() {
                                                                                                                                                                                                                                         player.setGameMode(GameMode.ADVENTURE);
+                                                                                                                                                                                                                                        player.setAllowFlight(false);
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                 }.runTaskLater(plugin, 10);
 
@@ -476,6 +471,7 @@ public class CinematicCommand implements CommandExecutor {
             for (Player p : players) {
                 p.setGameMode(GameMode.CREATIVE);
                 p.setInvisible(true);
+                p.setAllowFlight(true);
                 p.getInventory().clear();
                 play(p);
             }

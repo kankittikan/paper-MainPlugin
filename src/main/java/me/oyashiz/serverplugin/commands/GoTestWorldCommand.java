@@ -31,7 +31,7 @@ public class GoTestWorldCommand implements CommandExecutor {
                 SaveInventory saveInventory = new SaveInventory(plugin);
                 if(args[0].equals("go")) {
                     StaticFlags.canChangeMode = true;
-                    Location testWorld = new Location(Bukkit.getWorld("tester_world"), 0, 10 , 0);
+                    Location testWorld = new Location(Bukkit.getWorld("world_tester"), 0, 10 , 0);
                     try {
                         saveInventory.saveInventory(player, "testSave");
                     } catch (IOException e) {
@@ -42,7 +42,7 @@ public class GoTestWorldCommand implements CommandExecutor {
                     player.getInventory().clear();
                 }
                 if(args[0].equals("back")) {
-                    if(player.getWorld() != Bukkit.getWorld("tester_world")) return false;
+                    if(player.getWorld() != Bukkit.getWorld("world_tester")) return false;
                     StaticFlags.canChangeMode = true;
                     player.getInventory().clear();
                     player.getActivePotionEffects().clear();

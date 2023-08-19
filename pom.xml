@@ -48,7 +48,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>/Volumes/minecraft/plugins</outputDirectory>
+                    <outputDirectory>/Volumes/kan/Minecraft/plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

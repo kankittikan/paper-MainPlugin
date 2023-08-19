@@ -45,7 +45,7 @@ public class ReloadCommand implements CommandExecutor {
 
         if (args.length == 1) {
             if (args[0].equals("pack")) {
-                ResourcePack.setAll();
+                ResourcePack.setTest((Player) sender);
             }
         }
 

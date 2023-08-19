@@ -1,17 +1,17 @@
 package me.oyashiz.serverplugin.listeners;
 
 import me.oyashiz.serverplugin.MainPlugin;
+import me.oyashiz.serverplugin.tasks.Auth;
 import me.oyashiz.serverplugin.tasks.ResourcePack;
 import me.oyashiz.serverplugin.tasks.ScoreboardPlayer;
+import me.oyashiz.serverplugin.tasks.VerifyIpCountry;
 import me.oyashiz.serverplugin.utils.*;
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -26,60 +26,94 @@ public class JoinAndOutServerListener implements Listener {
     public JoinAndOutServerListener(MainPlugin plugin) {
         this.plugin = plugin;
         strings = new ArrayList<>();
+        strings.add("Thai font not ready");
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        ResourcePack.set(player);
+        if(!StaticLists.playerLock.contains(player)) StaticLists.playerLock.add(player);
 
-        if (player.isOp()) {
-            event.setJoinMessage(ChatColor.GREEN + player.getName() + ChatColor.WHITE + " join this server " + ChatColor.GOLD + "[Operator]");
-        } else {
-            event.setJoinMessage(ChatColor.GREEN + player.getName() + ChatColor.WHITE + " join this server " + ChatColor.GOLD + "[Player]");
-        }
+        String ip = player.getAddress().getAddress().toString().substring(1);
+        String port = String.valueOf(player.getAddress().getPort());
 
-        if (!strings.isEmpty()) {
-            player.sendMessage(ChatColor.YELLOW + "Announcement from administrator");
-            for (int i = 0; i < strings.size(); i++) {
-                player.sendMessage(i + 1 + ".) " + strings.get(i));
-            }
-            player.sendMessage(" ");
-        } else {
-            player.sendMessage(ChatColor.GREEN + "No announcement from administrator");
-        }
-
-        if (player.getWorld().getName().equals("world_fukie")) {
-            Location hub = new Location(Bukkit.getWorld("world_fukie"), 315, -60, -162);
-            player.teleport(hub);
-            return;
-        }
-
-        Location location = new Location(Bukkit.getWorld("world"), 22, 33, 33);
-        if (player.getLastPlayed() == 0) {
-            BukkitTask task1 = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    player.teleport(location);
-                }
-            }.runTaskLater(plugin, 10);
-        }
-        BukkitTask task12 = new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
-                if (player.getWorld() == StaticLocations.world) {
-                    playWelcomeMusic(player);
+                player.sendMessage(" ");
+                player.sendMessage("=========");
+                player.sendMessage("Inbound Connection Info: ");
+                player.sendMessage("Public Ip : " + ip);
+                player.sendMessage("Public Port : " + port);
+
+                if (VerifyIpCountry.verifyCountry(ip, player, "Thailand")) {
+                    player.sendMessage(ChatColor.GREEN + "Your Inbound is allowed");
+                    player.sendMessage("=========");
+                    player.sendMessage(" ");
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            ResourcePack.set(player);
+
+                            if (player.isOp()) {
+                                event.setJoinMessage(ChatColor.GREEN + player.getName() + ChatColor.WHITE + " join this server " + ChatColor.GOLD + "[Operator]");
+                            } else {
+                                event.setJoinMessage(ChatColor.GREEN + player.getName() + ChatColor.WHITE + " join this server " + ChatColor.GOLD + "[Player]");
+                            }
+
+                            if (!strings.isEmpty()) {
+                                player.sendMessage(ChatColor.YELLOW + "Announcement from administrator");
+                                for (int i = 0; i < strings.size(); i++) {
+                                    player.sendMessage(i + 1 + ".) " + strings.get(i));
+                                }
+                                player.sendMessage(" ");
+                            } else {
+                                player.sendMessage(ChatColor.GREEN + "No announcement from administrator");
+                            }
+
+                            new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    Auth auth = new Auth();
+                                    auth.doAuth(player);
+                                }
+                            }.runTaskLater(plugin, 1);
+
+
+                            if (player.getWorld().getName().equals("world_fukie")) {
+                                Location hub = new Location(Bukkit.getWorld("world_fukie"), 315, -60, -162);
+                                player.teleport(hub);
+                                return;
+                            }
+
+                            Location location = new Location(Bukkit.getWorld("world"), 22, 33, 33);
+                            if (player.getLastPlayed() == 0) {
+                                BukkitTask task1 = new BukkitRunnable() {
+                                    @Override
+                                    public void run() {
+                                        player.teleport(location);
+                                        player.setGameMode(GameMode.ADVENTURE);
+                                    }
+                                }.runTaskLater(plugin, 10);
+                            }
+                            BukkitTask task12 = new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    if (player.getWorld() == StaticLocations.world) {
+                                        playWelcomeMusic(player);
+                                    }
+                                }
+                            }.runTaskLater(plugin, 30);
+                        }
+                    }.runTaskLater(plugin, 20);
+
+                } else {
+                    player.kick(Component.text("Cannot verify your ip"));
                 }
             }
-        }.runTaskLater(plugin, 30);
+        }.runTaskLater(plugin, 20);
 
-//        BukkitTask taskPA = new BukkitRunnable() {
-//            @Override
-//            public void run() {
-//                AnnouncementCommand.broadcastPlayer(player, strings);
-//            }
-//        }.runTaskLater(plugin, 300);
     }
 
     @EventHandler

@@ -50,6 +50,7 @@ public class MainListener implements Listener {
                 public void run() {
                     if (i == notes.size() - 1) cancel();
                     PlaySound.playNoteLocation(event.getClickedBlock().getLocation(), notes.get(i++));
+
                 }
             }.runTaskTimer(plugin, 0, 10);
         }
@@ -150,6 +151,7 @@ public class MainListener implements Listener {
                         Material newMat = Material.valueOf(item.getItemStack().getType().toString().replaceAll("_POWDER", ""));
                         item.getItemStack().setType(newMat);
                     }
+
                 }
             }.runTaskLater(plugin, 10);
 

@@ -49,7 +49,7 @@ public class HallLight {
                 String in = (String) MainPlugin.lightConfig.getConfig().get(name);
                 if (in == null) {
                     SendAdmin.sendMsg("No this light name");
-                    return;
+
                 }
                 String[] arrayIn = in.split(" ");
                 int InIndex = 0;
@@ -63,6 +63,7 @@ public class HallLight {
                         }
                     }
                 }
+
             }
         }.runTask(plugin);
         StaticFlags.matrixLight = false;
@@ -83,7 +84,7 @@ public class HallLight {
                 String in = (String) MainPlugin.lightConfig.getConfig().get(name);
                 if (in == null) {
                     SendAdmin.sendMsg("No this light name");
-                    return;
+
                 }
                 String[] arrayIn = in.split(" ");
                 int InIndex = 0;
@@ -101,6 +102,7 @@ public class HallLight {
                 if(!name.equals("heart")) {
                     name = String.valueOf(Integer.parseInt(name) - 1);
                 }
+
             }
         }.runTaskTimer(plugin, 30, 30);
     }
@@ -124,6 +126,7 @@ public class HallLight {
                         }
                     }
                 }
+
             }
         }.runTaskTimer(plugin, 30, 20);
     }
@@ -140,11 +143,13 @@ public class HallLight {
                         public void run() {
                             StaticFlags.matrixLight = false;
                             load("clear", plugin);
+
                         }
                     }.runTaskLater(plugin, 10);
                     cancel();
                 }
                 count++;
+
             }
         }.runTaskTimer(plugin, 0, 10);
     }

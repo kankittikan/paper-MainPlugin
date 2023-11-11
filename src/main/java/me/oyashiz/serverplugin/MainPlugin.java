@@ -19,8 +19,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.eclipse.sisu.launch.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,10 +36,17 @@ public final class MainPlugin extends JavaPlugin {
 
     public static String resourcePack;
     public static String testPack;
+    private static MainPlugin mainPlugin;
+
+    public static MainPlugin getMainPlugin(){
+        return mainPlugin;
+    }
 
     @Override
     public void onEnable() {
-        File theDir = new File(getDataFolder().getAbsolutePath() + "/world");
+        mainPlugin = this;
+
+        File theDir = new File(getDataFolder().getAbsolutePath() + "/");
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
@@ -135,6 +144,8 @@ public final class MainPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MinecartMoveListener(this), this);
         getServer().getPluginManager().registerEvents(new AllUnBreakCommand(), this);
         getServer().getPluginManager().registerEvents(new Auth(), this);
+        getServer().getPluginManager().registerEvents(new HackListener(), this);
+        getServer().getPluginManager().registerEvents(new EndPortalListener(), this);
 
         getCommand("sethome").setExecutor(new SetSpawnCommand(this));
         getCommand("geteffect").setExecutor(new GetEffectCommand());
@@ -186,6 +197,8 @@ public final class MainPlugin extends JavaPlugin {
         getCommand("resetpassword").setExecutor(new ResetPasswordCommand());
         getCommand("allunbreak").setExecutor(new AllUnBreakCommand());
         getCommand("controlplayer").setExecutor(new ControlPlayerCommand(this));
+        getCommand("playscreen").setExecutor(new PlayScreenCommand());
+        getCommand("findmusic").setExecutor(new FindMusicCommand());
 
         World worldCreator;
         worldCreator = new WorldCreator("world_fukie").createWorld();
@@ -230,6 +243,14 @@ public final class MainPlugin extends JavaPlugin {
         for(Player p : Bukkit.getOnlinePlayers()) {
             auth.doAuth(p);
         }
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                getServer().dispatchCommand(getServer().getConsoleSender(), "gcr");
+                getLogger().info("Loaded GravityControl");
+            }
+        }.runTaskLater(this, 20);
     }
 
 }

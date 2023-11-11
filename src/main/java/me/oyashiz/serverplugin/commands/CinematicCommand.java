@@ -76,6 +76,7 @@ public class CinematicCommand implements CommandExecutor {
                                                 @Override
                                                 public void run() {
                                                     player.sendTitle("Minigames", "");
+
                                                 }
                                             }.runTaskLater(plugin, 50);
 
@@ -268,6 +269,7 @@ public class CinematicCommand implements CommandExecutor {
                                                                                                                                                                                                                         public void run() {
                                                                                                                                                                                                                             player.sendTitle("Survival", "");
                                                                                                                                                                                                                             player.playSound(player, Sound.MUSIC_DISC_OTHERSIDE, 0.5f, 1);
+
                                                                                                                                                                                                                         }
                                                                                                                                                                                                                     }.runTaskLater(plugin, 50);
                                                                                                                                                                                                                     play = true;
@@ -304,14 +306,18 @@ public class CinematicCommand implements CommandExecutor {
                                                                                                                                                                                                                                                             @Override
                                                                                                                                                                                                                                                             public void run() {
                                                                                                                                                                                                                                                                 player.sendTitle("Thank for join our server", "have fun!!");
+
                                                                                                                                                                                                                                                             }
                                                                                                                                                                                                                                                         }.runTaskLater(plugin, 150);
+
 
                                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                                 }.runTaskLater(plugin, 150);
 
+
                                                                                                                                                                                                                                             }
                                                                                                                                                                                                                                         }.runTaskLater(plugin, 150);
+
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                 }.runTaskLater(plugin, 100);
                                                                                                                                                                                                                                 play = true;
@@ -335,6 +341,7 @@ public class CinematicCommand implements CommandExecutor {
                                                                                                                                                                                                                                     public void run() {
                                                                                                                                                                                                                                         player.setGameMode(GameMode.ADVENTURE);
                                                                                                                                                                                                                                         player.setAllowFlight(false);
+
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                 }.runTaskLater(plugin, 10);
 
@@ -342,68 +349,87 @@ public class CinematicCommand implements CommandExecutor {
                                                                                                                                                                                                                                     @Override
                                                                                                                                                                                                                                     public void run() {
                                                                                                                                                                                                                                         dance(false);
+
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                 }.runTaskLater(plugin, 2040);
                                                                                                                                                                                                                             }
+
                                                                                                                                                                                                                         }
                                                                                                                                                                                                                     }.runTaskTimer(plugin, 0, 2);
                                                                                                                                                                                                                 }
+
                                                                                                                                                                                                             }
                                                                                                                                                                                                         }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                                                                                                     }
+
                                                                                                                                                                                                 }
                                                                                                                                                                                             }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                                                                                         }
+
                                                                                                                                                                                     }
                                                                                                                                                                                 }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                                                                             }
+
                                                                                                                                                                         }
                                                                                                                                                                     }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                                                                 }
+
                                                                                                                                                             }
                                                                                                                                                         }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                                                     }
+
                                                                                                                                                 }
                                                                                                                                             }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                                         }
+
                                                                                                                                     }
                                                                                                                                 }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                             }
+
                                                                                                                         }
                                                                                                                     }.runTaskTimer(plugin, 0, 2);
 
                                                                                                                 }
+
                                                                                                             }
                                                                                                         }.runTaskTimer(plugin, 0, 2);
                                                                                                     }
+
                                                                                                 }
                                                                                             }.runTaskTimer(plugin, 0, 2);
                                                                                         }
+
                                                                                     }
                                                                                 }.runTaskTimer(plugin, 0, 2);
                                                                             }
+
                                                                         }
                                                                     }.runTaskTimer(plugin, 0, 2);
                                                                 }
+
                                                             }
                                                         }.runTaskTimer(plugin, 0, 2);
                                                     }
+
                                                 }
                                             }.runTaskTimer(plugin, 0, 2);
                                         }
+
                                     }
                                 }.runTaskTimer(plugin, 0, 2);
                             }
+
                         }
                     }.runTaskTimer(plugin, 0, 2);
                 }
+
             }
         }.runTaskTimer(plugin, 0, 2);
     }
@@ -441,6 +467,7 @@ public class CinematicCommand implements CommandExecutor {
                         finalArmorStand.setRotation(180, 0);
                         finalArmorStand.setCustomNameVisible(false);
                     }
+
                 }
             }.runTaskTimer(plugin, 0, 5);
         }

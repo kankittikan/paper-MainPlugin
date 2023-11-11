@@ -54,6 +54,7 @@ public class SignClickListener implements Listener {
                         public void run() {
                             inHubLightingCommand.lightTask(Material.REDSTONE_BLOCK);
                             if (flag == 1) cancel();
+
                         }
                     }.runTaskTimerAsynchronously(plugin, clock, clock);
                     player.teleport(location);
@@ -69,6 +70,7 @@ public class SignClickListener implements Listener {
                                     p.sendMessage("Incoming Space Traveller " + ChatColor.GREEN + e.getPlayer().getName() + ChatColor.WHITE + " From Spaceship");
                                 }
                             }
+
                         }
                     }.runTaskLater(plugin, 30L);
 
@@ -77,6 +79,7 @@ public class SignClickListener implements Listener {
                         public void run() {
                             flag = 1;
                             inHubLightingCommand.lightTask(Material.AIR);
+
                         }
                     }.runTaskLater(plugin, 100L);
 
@@ -84,6 +87,7 @@ public class SignClickListener implements Listener {
                         @Override
                         public void run() {
                             hubLightingCommand.closeLight();
+
                         }
                     }.runTaskLater(plugin, 150L);
 
@@ -91,6 +95,7 @@ public class SignClickListener implements Listener {
                         @Override
                         public void run() {
                             hubLightingCommand.openLight();
+
                         }
                     }.runTaskLater(plugin, 151L);
 
@@ -99,6 +104,7 @@ public class SignClickListener implements Listener {
                         public void run() {
                             hubLightingCommand.closeLight();
                             spaceIntruder.stop();
+
                         }
                     }.runTaskLater(plugin, 153L);
 
@@ -108,6 +114,7 @@ public class SignClickListener implements Listener {
                             hubLightingCommand.openLight();
                             Location location1 = new Location(player.getWorld(), 22, 9, 34);
                             location1.getBlock().setType(Material.WHITE_STAINED_GLASS);
+
                         }
                     }.runTaskLater(plugin, 154L);
 

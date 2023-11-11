@@ -47,6 +47,7 @@ public class AirLockListener implements Listener {
                 @Override
                 public void run() {
                     location.getBlock().setType(material);
+
                 }
             }.runTaskLater(plugin, delay);
             delay += 1;
@@ -58,6 +59,7 @@ public class AirLockListener implements Listener {
                 @Override
                 public void run() {
                     location.getBlock().setType(Material.AIR);
+
                 }
             }.runTaskLater(plugin, delay);
             delay += 1;
@@ -86,6 +88,7 @@ public class AirLockListener implements Listener {
                         }
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_COW_BELL, 0.5f, 1);
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.AMBIENT_UNDERWATER_ENTER, 0.5f, 1);
+
                     }
                 }.runTaskLater(plugin, 50);
 
@@ -96,6 +99,7 @@ public class AirLockListener implements Listener {
                             location.getBlock().setType(Material.AIR);
                         }
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 0.5f, 1);
+
                     }
                 }.runTaskLater(plugin, 100);
 
@@ -108,6 +112,7 @@ public class AirLockListener implements Listener {
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_COW_BELL, 0.5f, 1);
                         e.getClickedBlock().setType(Material.TRIPWIRE_HOOK);
                         locationButtonOut.getBlock().setType(Material.TRIPWIRE_HOOK);
+
                     }
                 }.runTaskLater(plugin, 150);
             }
@@ -123,6 +128,7 @@ public class AirLockListener implements Listener {
                     public void run() {
                         lightTask(Material.REDSTONE_BLOCK);
                         if (flag == 1) cancel();
+
                     }
                 }.runTaskTimerAsynchronously(plugin, clock, clock);
                 locationCheck.getBlock().setType(Material.AIR);
@@ -144,6 +150,7 @@ public class AirLockListener implements Listener {
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_COW_BELL, 0.5f, 1);
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.AMBIENT_UNDERWATER_ENTER, 0.5f, 1);
                         e.getPlayer().sendMessage(ChatColor.GRAY + "Scanning Player");
+
                     }
                 }.runTaskLater(plugin, 50);
 
@@ -160,6 +167,7 @@ public class AirLockListener implements Listener {
                             }
                         }
                         spaceIntruder.stop();
+
                     }
                 }.runTaskLater(plugin, 100);
 
@@ -175,6 +183,7 @@ public class AirLockListener implements Listener {
                         flag = 1;
                         lightTask(Material.AIR);
                         locationCheck.getBlock().setType(Material.WHITE_STAINED_GLASS);
+
                     }
                 }.runTaskLater(plugin, 150);
             }
@@ -192,6 +201,7 @@ public class AirLockListener implements Listener {
                             location.getBlock().setType(Material.BLACK_STAINED_GLASS);
                         }
                         e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_COW_BELL, 0.5f, 1);
+
                     }
                 }.runTaskLater(plugin, 50);
             }

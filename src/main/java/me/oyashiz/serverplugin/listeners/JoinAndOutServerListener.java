@@ -1,5 +1,7 @@
 package me.oyashiz.serverplugin.listeners;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+import com.destroystokyo.paper.profile.ProfileProperty;
 import me.oyashiz.serverplugin.MainPlugin;
 import me.oyashiz.serverplugin.tasks.Auth;
 import me.oyashiz.serverplugin.tasks.ResourcePack;
@@ -12,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
+import org.bukkit.profile.PlayerTextures;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -26,14 +29,12 @@ public class JoinAndOutServerListener implements Listener {
     public JoinAndOutServerListener(MainPlugin plugin) {
         this.plugin = plugin;
         strings = new ArrayList<>();
-        strings.add("Thai font not ready");
+        //strings.add("Thai font not ready");
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
-        if(!StaticLists.playerLock.contains(player)) StaticLists.playerLock.add(player);
 
         String ip = player.getAddress().getAddress().toString().substring(1);
         String port = String.valueOf(player.getAddress().getPort());
@@ -44,10 +45,13 @@ public class JoinAndOutServerListener implements Listener {
                 player.sendMessage(" ");
                 player.sendMessage("=========");
                 player.sendMessage("Inbound Connection Info: ");
-                player.sendMessage("Public Ip : " + ip);
-                player.sendMessage("Public Port : " + port);
 
-                if (VerifyIpCountry.verifyCountry(ip, player, "Thailand")) {
+                player.sendMessage(ChatColor.RED + "Bypass IP Service");
+
+//                player.sendMessage("Public Ip : " + ip);
+//                player.sendMessage("Public Port : " + port);
+
+                if (true) {
                     player.sendMessage(ChatColor.GREEN + "Your Inbound is allowed");
                     player.sendMessage("=========");
                     player.sendMessage(" ");
@@ -77,6 +81,7 @@ public class JoinAndOutServerListener implements Listener {
                                 public void run() {
                                     Auth auth = new Auth();
                                     auth.doAuth(player);
+
                                 }
                             }.runTaskLater(plugin, 1);
 
@@ -84,7 +89,7 @@ public class JoinAndOutServerListener implements Listener {
                             if (player.getWorld().getName().equals("world_fukie")) {
                                 Location hub = new Location(Bukkit.getWorld("world_fukie"), 315, -60, -162);
                                 player.teleport(hub);
-                                return;
+
                             }
 
                             Location location = new Location(Bukkit.getWorld("world"), 22, 33, 33);
@@ -94,6 +99,7 @@ public class JoinAndOutServerListener implements Listener {
                                     public void run() {
                                         player.teleport(location);
                                         player.setGameMode(GameMode.ADVENTURE);
+
                                     }
                                 }.runTaskLater(plugin, 10);
                             }
@@ -103,14 +109,17 @@ public class JoinAndOutServerListener implements Listener {
                                     if (player.getWorld() == StaticLocations.world) {
                                         playWelcomeMusic(player);
                                     }
+
                                 }
                             }.runTaskLater(plugin, 30);
+
                         }
                     }.runTaskLater(plugin, 20);
 
                 } else {
                     player.kick(Component.text("Cannot verify your ip"));
                 }
+
             }
         }.runTaskLater(plugin, 20);
 
@@ -176,6 +185,7 @@ public class JoinAndOutServerListener implements Listener {
                 @Override
                 public void run() {
                     player.teleport(smith);
+
                 }
             }.runTaskLater(plugin, 200);
             return;

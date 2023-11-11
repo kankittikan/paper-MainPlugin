@@ -46,6 +46,7 @@ public class SurvivalListener implements Listener {
                     }
                 }
                 count[0]--;
+
             }
         }.runTaskTimer(plugin, 50, 20);
 
@@ -71,6 +72,7 @@ public class SurvivalListener implements Listener {
                             p.teleport(StaticLocations.arrivalOut);
                             p.setGameMode(GameMode.ADVENTURE);
                         }
+
                     }
                 }.runTaskLater(plugin, 50);
                 BukkitTask goSpaceShip = new BukkitRunnable() {
@@ -91,10 +93,13 @@ public class SurvivalListener implements Listener {
                                 playerInRocket.clear();
                                 spaceshipLightCommand.setLight("off");
                                 outHubLightCommand.setLight("off");
+
                             }
                         }.runTaskLater(plugin, 100);
+
                     }
                 }.runTaskLater(plugin, 300);
+
             }
         }.runTaskLater(plugin, 700);
     }

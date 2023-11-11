@@ -24,6 +24,7 @@ public class SpaceIntruder {
                         p.playSound(p.getLocation(), "alarm", 0.1f, 1);
                     }
                     if(stop) cancel();
+
                 }
             }.runTaskTimer(plugin, 30, 40);
         }

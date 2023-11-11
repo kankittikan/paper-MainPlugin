@@ -12,29 +12,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 public class GoCellCommand implements CommandExecutor {
-    private MainPlugin plugin;
+    private final MainPlugin plugin;
 
     public GoCellCommand(MainPlugin plugin) {
         this.plugin = plugin;
     }
 
-    public void goCell(Player player) {
+    public static void goCell(Player player) {
         player.sendMessage(ChatColor.RED + "You has been locked");
         player.setGameMode(GameMode.ADVENTURE);
         player.setOp(false);
         Location location = new Location(Bukkit.getWorld("world"), 39 ,5 ,51);
-        BukkitTask task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                player.teleport(location);
-            }
-        }.runTaskLater(plugin, 10);
-        BukkitTask task1 = new BukkitRunnable() {
-            @Override
-            public void run() {
-                player.teleport(location);
-            }
-        }.runTaskLater(plugin, 10);
+        player.teleport(location);
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -65,12 +54,14 @@ public class GoCellCommand implements CommandExecutor {
                     @Override
                     public void run() {
                         target.teleport(location2);
+
                     }
                 }.runTaskLater(plugin, 10);
                 BukkitTask task1 = new BukkitRunnable() {
                     @Override
                     public void run() {
                         target.teleport(location2);
+
                     }
                 }.runTaskLater(plugin, 10);
             }

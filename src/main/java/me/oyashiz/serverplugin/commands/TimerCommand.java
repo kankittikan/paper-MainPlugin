@@ -34,8 +34,10 @@ public class TimerCommand implements CommandExecutor {
                             @Override
                             public void run() {
                                 location.getBlock().setType(Material.AIR);
+
                             }
                         }.runTaskLater(plugin, 10);
+
                     }
                 }.runTaskLater(plugin, mSec);
             }

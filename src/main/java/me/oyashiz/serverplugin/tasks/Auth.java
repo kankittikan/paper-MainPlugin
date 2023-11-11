@@ -1,6 +1,5 @@
 package me.oyashiz.serverplugin.tasks;
 
-import jdk.tools.jmod.Main;
 import me.oyashiz.serverplugin.MainPlugin;
 import me.oyashiz.serverplugin.utils.ConfigReader;
 import me.oyashiz.serverplugin.utils.SendAdmin;
@@ -81,7 +80,6 @@ public class Auth implements CommandExecutor, Listener {
             player.sendMessage(Component.text(ChatColor.AQUA + "Your password will be digest to SHA-256\n"));
             player.sendMessage(Component.text(ChatColor.AQUA + "Enter your new password: /password <pass>"));
         }
-        player.setAllowFlight(true);
     }
 
     @EventHandler
@@ -105,8 +103,6 @@ public class Auth implements CommandExecutor, Listener {
                             StaticLists.playerLock.remove(player);
 
                             playerGrant.add(player);
-
-                            player.setAllowFlight(false);
 
                             if(player.getResourcePackStatus().name().equals("FAILED_DOWNLOAD")) {
                                 player.kick(Component.text("Cannot detect your server resource-pack"));

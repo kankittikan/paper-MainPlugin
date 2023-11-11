@@ -40,7 +40,7 @@ public class OuterWorldButtonListener implements Listener {
                         @Override
                         public void run() {
                             boardCastList(StaticLists.playerDepartureB147, ChatColor.RED + "Request denied, gate is using");
-                            return;
+
                         }
                     }.runTaskLater(plugin, 50);
                 } else {
@@ -50,7 +50,7 @@ public class OuterWorldButtonListener implements Listener {
                         public void run() {
                             if(StaticLists.playerDepartureB147.isEmpty()) {
                                 StaticFlags.TravelFlag = 0;
-                                return;
+
                             }
                             boardCastList(StaticLists.playerDepartureB147, ChatColor.GREEN + "Request approved, you will be depart in 30 seconds");
                             SpaceshipLightCommand spaceshipLightCommand = new SpaceshipLightCommand(plugin);
@@ -63,6 +63,7 @@ public class OuterWorldButtonListener implements Listener {
                                     for(Player p : StaticLists.playerDepartureB147) {
                                         p.teleport(StaticLocations.arrivalOut);
                                     }
+
                                 }
                             }.runTaskLater(plugin, 50);
                             BukkitTask goSpaceShip = new BukkitRunnable() {
@@ -83,10 +84,13 @@ public class OuterWorldButtonListener implements Listener {
                                             StaticLists.playerDepartureB147.clear();
                                             spaceshipLightCommand.setLight("off");
                                             outHubLightCommand.setLight("off");
+
                                         }
                                     }.runTaskLater(plugin, 100);
+
                                 }
                             }.runTaskLater(plugin, 300);
+
                         }
                     }.runTaskLater(plugin, 50);
                 }

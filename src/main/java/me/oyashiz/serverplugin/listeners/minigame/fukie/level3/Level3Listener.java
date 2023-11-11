@@ -181,6 +181,7 @@ public class Level3Listener implements Listener {
 
                     finalByrorgot.getBlock().setType(Material.REDSTONE_BLOCK);
                     finalByrorgot.getBlock().setType(Material.AIR);
+
                 }
             }.runTaskLater(plugin, 200);
         }

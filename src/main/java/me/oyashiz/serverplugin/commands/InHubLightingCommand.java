@@ -36,6 +36,7 @@ public class InHubLightingCommand implements CommandExecutor {
                     location1.getBlock().setType(material);
                     location2.getBlock().setType(material);
                     location3.getBlock().setType(material);
+
                 }
             }.runTaskLater(plugin, delay);
             delay += 1;
@@ -55,6 +56,7 @@ public class InHubLightingCommand implements CommandExecutor {
                     location1.getBlock().setType(Material.AIR);
                     location2.getBlock().setType(Material.AIR);
                     location3.getBlock().setType(Material.AIR);
+
                 }
             }.runTaskLater(plugin, delay);
             delay += 1;
@@ -74,6 +76,7 @@ public class InHubLightingCommand implements CommandExecutor {
                     public void run() {
                         lightTask(Material.REDSTONE_BLOCK);
                         if (flag == 1) cancel();
+
                     }
                 }.runTaskTimer(plugin, clock, clock);
             }

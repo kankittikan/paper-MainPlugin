@@ -71,6 +71,7 @@ public class FukieListener implements Listener {
                     @Override
                     public void run() {
                         event.getPlayer().teleport(StaticLocations.home);
+
                     }
                 }.runTaskLater(plugin, 20);
             }
@@ -94,6 +95,7 @@ public class FukieListener implements Listener {
                             public void run() {
                                 SpawnLevel1 spawnLevel1 = new SpawnLevel1();
                                 spawnLevel1.spawn(plugin);
+
                             }
                         }.runTaskLater(plugin, 50);
                     }
@@ -106,6 +108,7 @@ public class FukieListener implements Listener {
                             public void run() {
                                 SpawnLevel2 spawnLevel2 = new SpawnLevel2();
                                 spawnLevel2.spawn(plugin);
+
                             }
                         }.runTaskLater(plugin, 50);
                     }
@@ -119,6 +122,7 @@ public class FukieListener implements Listener {
                             public void run() {
                                 SpawnLevel3 spawnLevel3 = new SpawnLevel3();
                                 spawnLevel3.spawn(plugin);
+
                             }
                         }.runTaskLater(plugin, 50);
                     }
@@ -131,6 +135,7 @@ public class FukieListener implements Listener {
                             public void run() {
                                 SpawnLevel4 spawnLevel4 = new SpawnLevel4();
                                 spawnLevel4.spawn(plugin);
+
                             }
                         }.runTaskLater(plugin, 50);
                     }
@@ -144,6 +149,7 @@ public class FukieListener implements Listener {
                             public void run() {
                                 SpawnLevel5 spawnLevel5 = new SpawnLevel5();
                                 spawnLevel5.spawn(plugin);
+
                             }
                         }.runTaskLater(plugin, 50);
                     }

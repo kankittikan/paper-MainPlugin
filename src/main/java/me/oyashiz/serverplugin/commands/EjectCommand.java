@@ -3,6 +3,8 @@ package me.oyashiz.serverplugin.commands;
 import me.oyashiz.serverplugin.MainPlugin;
 import me.oyashiz.serverplugin.tasks.PlaySound;
 import me.oyashiz.serverplugin.utils.StaticLocations;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -48,6 +50,7 @@ public class EjectCommand implements CommandExecutor {
                         }
                     }
                     PlaySound.play(Sound.BLOCK_PISTON_EXTEND, StaticLocations.world, 1);
+
                 }
             }.runTaskLater(plugin, 20);
         }

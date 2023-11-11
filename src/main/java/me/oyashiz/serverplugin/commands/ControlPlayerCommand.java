@@ -59,11 +59,13 @@ public class ControlPlayerCommand implements CommandExecutor, Listener {
                 @Override
                 public void run() {
                     player.teleport(op.getLocation());
+                    player.setGameMode(GameMode.SURVIVAL);
                     if(cancel) {
                         cancel();
                         cancel = false;
                         playerLock = null;
                     }
+
                 }
             }.runTaskTimer(mainPlugin, 0, 1);
         }

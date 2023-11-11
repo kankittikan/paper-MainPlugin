@@ -35,6 +35,7 @@ public class BookingInHubListener implements Listener {
                 @Override
                 public void run() {
                     SendMsg.send(StaticLocations.world, "[All Traveller] " + "Depart within 1 minute");
+
                 }
             }.runTaskLater(plugin, 50);
             BukkitTask task2 = new BukkitRunnable() {
@@ -43,6 +44,7 @@ public class BookingInHubListener implements Listener {
                     for(Player player : StaticLists.playerDeparture) {
                         player.playSound(player.getLocation(), "engine", 0.2f, 1);
                     }
+
                 }
             }.runTaskLater(plugin, 900);
             BukkitTask task1 = new BukkitRunnable() {
@@ -59,12 +61,14 @@ public class BookingInHubListener implements Listener {
                                         @Override
                                         public void run() {
                                             player.teleport(des);
+
                                         }
                                     }.runTaskLater(plugin, 10);
                                     player.sendMessage(ChatColor.GREEN + "Welcome to " + des.getWorld().getName());
                                     StaticLists.playerDeparture.clear();
                                     StaticFlags.TravelFlag = 0;
                                     StaticFlags.DepartFlag = 0;
+
                                 }
                             }.runTaskLater(plugin, 40);
                         }
@@ -74,6 +78,7 @@ public class BookingInHubListener implements Listener {
                         StaticFlags.TravelFlag = 0;
                         StaticFlags.DepartFlag = 0;
                     }
+
                 }
             }.runTaskLater(plugin, 1200);
 

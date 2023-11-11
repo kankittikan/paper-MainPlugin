@@ -69,8 +69,10 @@ public class MinigamesTeleportListener implements Listener {
                                 e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 80, 1));
                                 e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_END_PORTAL_SPAWN, 0.5f, 2);
                                 e.getPlayer().sendTitle("Devil Asteroid", ChatColor.RED + "โปรดอ่านกฎก่อนเล่น");
+
                             }
                         }.runTaskLater(plugin, 100);
+
                     }
                 }.runTaskLater(plugin, 5);
             }

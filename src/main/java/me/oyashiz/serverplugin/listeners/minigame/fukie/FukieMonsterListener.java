@@ -144,8 +144,10 @@ public class FukieMonsterListener implements Listener {
                                         golem2.setHealth(0);
                                         PlaySound.stop(StaticLocations.fukieWorld);
                                         SendMsg.send(StaticLocations.fukieWorld, "Golem has gone");
+
                                     }
                                 }.runTaskLater(plugin, 600);
+
                             }
                         }.runTaskLater(plugin, 100);
                     }
@@ -156,6 +158,7 @@ public class FukieMonsterListener implements Listener {
                             @Override
                             public void run() {
                                 PlaySound.play(Sound.ENTITY_EXPERIENCE_ORB_PICKUP, StaticLocations.fukieWorld);
+
                             }
                         }.runTaskTimer(plugin, 3, 3);
                         SendMsg.send(StaticLocations.fukieWorld, event.getPlayer().getName() + " use bomb");
@@ -170,6 +173,7 @@ public class FukieMonsterListener implements Listener {
                             public void run() {
                                 PlaySound.play(Sound.BLOCK_NOTE_BLOCK_COW_BELL, StaticLocations.fukieWorld);
                                 sound.cancel();
+
                             }
                         }.runTaskLater(plugin, 50);
                     }

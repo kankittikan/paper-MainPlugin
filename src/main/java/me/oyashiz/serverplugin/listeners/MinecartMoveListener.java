@@ -1,11 +1,17 @@
 package me.oyashiz.serverplugin.listeners;
 
+import io.papermc.paper.event.entity.EntityMoveEvent;
 import me.oyashiz.serverplugin.MainPlugin;
+import me.oyashiz.serverplugin.utils.SendAdmin;
 import org.bukkit.*;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.vehicle.VehicleCreateEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
@@ -55,7 +61,7 @@ public class MinecartMoveListener implements Listener {
     public void minecartDeSpawn(VehicleDestroyEvent event) {
         Chunk chunk = event.getVehicle().getLocation().getChunk();
         for (Entity entity : chunk.getEntities()) {
-            if (entity instanceof Minecart) return;
+            if (entity instanceof Minecart && entity != event.getVehicle()) return;
         }
         chunk.setForceLoaded(false);
     }

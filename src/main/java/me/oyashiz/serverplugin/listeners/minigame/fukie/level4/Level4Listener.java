@@ -153,16 +153,22 @@ public class Level4Listener implements Listener {
                                                             SignLevel.change();
 
 
+
                                                         }
                                                     }.runTaskLater(plugin, 100);
+
                                                 }
                                             }.runTaskLater(plugin, 100);
+
                                         }
                                     }.runTaskLater(plugin, 100);
+
                                 }
                             }.runTaskLater(plugin, 100);
+
                         }
                     }.runTaskLater(plugin, 100);
+
 
                 }
             }.runTaskLater(plugin, 100);

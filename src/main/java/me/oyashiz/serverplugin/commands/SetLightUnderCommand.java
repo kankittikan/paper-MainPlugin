@@ -52,6 +52,7 @@ public class SetLightUnderCommand implements CommandExecutor {
                         }
                         StaticFlags.underLight = false;
                         count++;
+
                     }
                 }.runTaskTimer(plugin, 0, 5);
             }
@@ -102,6 +103,7 @@ public class SetLightUnderCommand implements CommandExecutor {
 
                             old = value;
                             old2 = value2;
+
                         }
                     }.runTaskTimer(plugin, 0, 20);
                 }

@@ -106,3 +106,7 @@ commands:
     permission: op
   controlplayer:
     permission: op
+  playscreen:
+    permission: op
+  findmusic:
+    description: Find music in list

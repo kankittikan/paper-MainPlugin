@@ -58,12 +58,15 @@ public class SleepListener implements Listener {
                                             p.setSleepingIgnored(false);
                                         }
                                         SendMsg.send(StaticLocations.survivalWorld, ChatColor.GREEN + "Force sleep has been executed");
+
                                     }
                                 }.runTaskLater(plugin, 100);
                             }
+
                         }
                     }.runTaskTimer(plugin, 0, 20);
                 }
+
             }
         }.runTaskLater(plugin, 20);
 

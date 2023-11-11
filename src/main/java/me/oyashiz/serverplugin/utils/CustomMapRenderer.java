@@ -15,6 +15,7 @@ public class CustomMapRenderer extends MapRenderer {
 
     private BufferedImage bufferedImage;
     private boolean done;
+
     public CustomMapRenderer() {
         done = false;
     }
@@ -29,17 +30,23 @@ public class CustomMapRenderer extends MapRenderer {
         try {
             bufferedImage = ImageIO.read(new URL(url));
             bufferedImage = MapPalette.resizeImage(bufferedImage);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             return false;
         }
         this.bufferedImage = bufferedImage;
         return true;
     }
 
+    public boolean load(BufferedImage bufferedImage) {
+        bufferedImage = MapPalette.resizeImage(bufferedImage);
+
+        this.bufferedImage = bufferedImage;
+        return true;
+    }
+
     @Override
     public void render(MapView map, MapCanvas canvas, Player player) {
-        if(done) return;
+        if (done) return;
 
         canvas.drawImage(0, 0, bufferedImage);
 

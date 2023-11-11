@@ -35,9 +35,7 @@ public class ShowStatusCommand implements CommandExecutor {
             }
 
             Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) return false;
-
-            run = true;
+            if (target == null)             run = true;
             ScoreboardManager manager = Bukkit.getScoreboardManager();
             Scoreboard scoreboard = manager.getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("status", "Dummy", args[0]);
@@ -92,6 +90,7 @@ public class ShowStatusCommand implements CommandExecutor {
                     else rayBlock.setSuffix("");
                     if (entity != null) rayEntity.setSuffix(ChatColor.AQUA + entity.getName().toLowerCase());
                     else rayEntity.setSuffix("");
+
                 }
             }.runTaskTimer(plugin, 0, 1);
 

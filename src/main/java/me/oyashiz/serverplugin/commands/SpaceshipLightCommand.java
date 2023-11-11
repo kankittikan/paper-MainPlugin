@@ -26,6 +26,7 @@ public class SpaceshipLightCommand implements CommandExecutor {
             @Override
             public void run() {
                 location.getBlock().setType(Material.AIR);
+
             }
         }.runTaskLater(plugin, 20);
     }
@@ -38,6 +39,7 @@ public class SpaceshipLightCommand implements CommandExecutor {
                 public void run() {
                     lightTask();
                     if(StaticFlags.SpaceshipLightFlag == 1) cancel();
+
                 }
             }.runTaskTimer(plugin, 30, 30);
         }
@@ -58,6 +60,7 @@ public class SpaceshipLightCommand implements CommandExecutor {
                     public void run() {
                         lightTask();
                         if(StaticFlags.SpaceshipLightFlag == 1) cancel();
+
                     }
                 }.runTaskTimer(plugin, 30, 30);
             }

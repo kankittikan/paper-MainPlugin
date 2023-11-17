@@ -48,7 +48,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>/Volumes/kan/Minecraft/plugins</outputDirectory>
+                    <outputDirectory>/home/kan/Minecraft/plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

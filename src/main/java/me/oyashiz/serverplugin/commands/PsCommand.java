@@ -20,7 +20,12 @@ public class PsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof BlockCommandSender) {
-            PlaySound.stopAll();
+            if(args.length == 3 &&args[0].equals("on")) {
+                PlaySound.playAll(Sound.valueOf(args[1].toUpperCase()), Float.parseFloat(args[2]));
+            }
+            else{
+                PlaySound.stopAll();
+            }
         }
 
         if (sender instanceof Player) {

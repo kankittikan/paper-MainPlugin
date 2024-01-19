@@ -35,7 +35,7 @@ public class ShowStatusCommand implements CommandExecutor {
             }
 
             Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null)             run = true;
+            if (target == null) run = true;
             ScoreboardManager manager = Bukkit.getScoreboardManager();
             Scoreboard scoreboard = manager.getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("status", "Dummy", args[0]);

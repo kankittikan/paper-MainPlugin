@@ -4,6 +4,7 @@ import me.oyashiz.serverplugin.tasks.PlaySound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -38,9 +39,18 @@ public class PlayCustomCommand implements CommandExecutor {
                 if(args[3].equals("all")) {
                     PlaySound.stopAll();
                     for(Player player1 : Bukkit.getOnlinePlayers()) {
-                        player1.playSound(player.getLocation(), args[1], Float.parseFloat(args[2]), 1);
+                        player1.playSound(player1.getLocation(), args[1], Float.parseFloat(args[2]), 1);
                     }
                     player.sendMessage(ChatColor.GREEN + "Playing all " + args[1].toUpperCase());
+                }
+            }
+        }
+
+        if(sender instanceof BlockCommandSender) {
+            if(args.length == 2) {
+                PlaySound.stopAll();
+                for(Player player1 : Bukkit.getOnlinePlayers()) {
+                    player1.playSound(player1.getLocation(), args[0], Float.parseFloat(args[1]), 1);
                 }
             }
         }

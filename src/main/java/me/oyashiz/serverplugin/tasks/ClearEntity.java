@@ -25,6 +25,7 @@ public class ClearEntity {
         entityTypeArrayList.add(EntityType.ILLUSIONER);
         entityTypeArrayList.add(EntityType.PILLAGER);
         entityTypeArrayList.add(EntityType.VINDICATOR);
+        entityTypeArrayList.add(EntityType.SHULKER);
 
         int count = 0;
         if (world == null) return;

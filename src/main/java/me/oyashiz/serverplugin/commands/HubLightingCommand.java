@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class HubLightingCommand implements CommandExecutor {
     private final MainPlugin plugin;
-    private final World world;
+    private World world;
 
     private ArrayList<Location> locationArrayList;
 
@@ -66,14 +66,6 @@ public class HubLightingCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (world == null) {
-            for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-                if (player.isOp()) {
-                    player.sendMessage(ChatColor.RED + "Can not find lobby world");
-                }
-            }
-            return false;
-        }
         if (args.length == 1) {
             if (args[0].equals("on")) {
                 openLight();

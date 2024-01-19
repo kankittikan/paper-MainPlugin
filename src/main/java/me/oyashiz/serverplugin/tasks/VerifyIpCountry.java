@@ -22,7 +22,7 @@ public class VerifyIpCountry {
             JSONObject json = (JSONObject) parser.parse(new InputStreamReader(url.openStream()));
             if(json.get("status").toString().equals("fail")) {
                 player.sendMessage(ChatColor.RED + "Cannot verify your ip");
-                //return false;
+                return false;
             }
             String country = (String) json.get("country");
             String isp = (String) json.get("isp");

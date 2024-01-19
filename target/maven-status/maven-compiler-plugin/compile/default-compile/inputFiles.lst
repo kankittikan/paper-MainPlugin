@@ -1,6 +1,8 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/minigame/fukie/FukieMonsterListener.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/PlayerOpeningCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/level1/CommonLevel1NBT.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/level2/SpawnLevel2.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/LiftState.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/minigame/fukie/FukieListener.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/SendMsg.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/GetFirework.java
@@ -23,6 +25,7 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/ResourcePack.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/HackListener.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/GetDistanceCommand.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/WaypointCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/StaticLists.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/SetPerformingLevelCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/ClearEntity.java
@@ -30,6 +33,7 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/RayTracingCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/PlayCustomCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/level5/CommonLevel5ZombieNBT.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/IntruderHubLightingCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/RocketLight.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/ModeCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/MainPlugin.java
@@ -51,6 +55,7 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/GoRocketCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/SetLightUnderCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/MinecartMoveListener.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/ChangeWorldCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/RandomFireworkNBT.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/FillBlock.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/Auth.java
@@ -60,8 +65,10 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/HallLight.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/GetInfoCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/SaveInventory.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/LockJoinCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/level1/SpawnLevel1.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/StaticInt.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/WorldIntruderListener.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/CustomMapRenderer.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/StaticFlags.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/OuterWorldButtonListener.java
@@ -84,6 +91,7 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/SignLevel.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/InHubLightingCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/NetherPortalListener.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/PlaySideLightCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/ConfigReader.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/SetTitle.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/JoinAndOutServerListener.java
@@ -97,6 +105,8 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/utils/Attribute.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/level3/CommonLevel3CreeperNBT.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/AnnouncementCommand.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/AuthListener.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/TuuDanceCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/LoadLightCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/UnBreakCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/ShowStatTabComplete.java
@@ -125,6 +135,8 @@
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/TestCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/tasks/level2/CommonLevel2NBT.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/minigame/MinigamesTeleportListener.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/listeners/HubLiftListener.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/MapImageCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/TimerCommand.java
 /home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/RocketLightCommand.java
+/home/kan/IntelliJ/paper-MainPlugin/src/main/java/me/oyashiz/serverplugin/commands/IntruderWorldCommand.java

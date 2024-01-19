@@ -90,7 +90,6 @@ public class MapManager implements Listener {
             });
     }
 
-
     public boolean hasImage(int id) {
         return savedImages.containsKey(id);
     }

@@ -1,6 +1,5 @@
 package me.oyashiz.serverplugin.listeners;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +13,7 @@ public class HackListener implements Listener {
         if(event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
             Player damager = (Player) event.getDamager();
             if(damager.getTargetEntity(5) != event.getEntity() && event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
-                damager.kick(Component.text("Detected your attack action"));
+                //damager.kick(Component.text("Detected your attack action"));
             }
         }
     }

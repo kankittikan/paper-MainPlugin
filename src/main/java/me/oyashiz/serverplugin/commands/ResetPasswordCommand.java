@@ -13,13 +13,12 @@ import org.jetbrains.annotations.NotNull;
 public class ResetPasswordCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(strings.length == 1) {
+        if (strings.length == 1) {
             Player target = Bukkit.getPlayerExact(strings[0]);
-            if(target == null) return false;
             MainPlugin.passwordConfig.getConfig().set(target.getName(), null);
             commandSender.sendMessage(Component.text("Reset completed"));
             ConfigReader.save(MainPlugin.passwordConfig);
-            target.kick(Component.text("Your password has been reset"));
+            if (target.isOnline()) target.kick(Component.text("Your password has been reset"));
         }
         return false;
     }

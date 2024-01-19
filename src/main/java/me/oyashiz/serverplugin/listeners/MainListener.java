@@ -1,5 +1,7 @@
 package me.oyashiz.serverplugin.listeners;
 
+import io.papermc.paper.event.player.PlayerItemFrameChangeEvent;
+import io.papermc.paper.event.player.PlayerPickItemEvent;
 import me.oyashiz.serverplugin.MainPlugin;
 import me.oyashiz.serverplugin.tasks.PlaySound;
 import me.oyashiz.serverplugin.tasks.ScoreboardPlayer;
@@ -9,12 +11,12 @@ import org.bukkit.entity.Bat;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.entity.ItemSpawnEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.*;
@@ -61,22 +63,43 @@ public class MainListener implements Listener {
         if (location.equals(new Location(StaticLocations.world, 10, 6, 84))) {
             event.getPlayer().teleport(new Location(StaticLocations.world, 13, 5, 85));
         }
+        if (location.getWorld().getName().equals("world") && event.getClickedBlock().getType().toString().endsWith("BED")) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
     public void playerMove(PlayerMoveEvent event) {
-        if(StaticLists.playerLock.contains(event.getPlayer())) {
+        if (StaticLists.playerLock.contains(event.getPlayer())) {
             event.getPlayer().setInvulnerable(true);
             event.setCancelled(true);
-        }
-        else {
+        } else {
             event.getPlayer().setInvulnerable(false);
         }
     }
 
     @EventHandler
-    public void interactEntity(PlayerInteractEntityEvent event) {
-        if (event.getRightClicked() instanceof Player) {
+    public void interactEntity(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player && event.getEntity() instanceof Player)) return;
+        Player player1 = (Player) event.getDamager();
+        Player player2 = (Player) event.getEntity();
+
+        if (player1.isSneaking() && player2.isSneaking()) {
+            ItemStack itemStack1 = player1.getInventory().getItemInMainHand();
+            ItemStack itemStack2 = player2.getInventory().getItemInMainHand();
+
+            player1.getInventory().setItemInMainHand(null);
+            player2.getInventory().setItemInMainHand(null);
+
+            //swap
+            player1.getInventory().setItemInMainHand(itemStack2);
+            player2.getInventory().setItemInMainHand(itemStack1);
+        }
+    }
+
+    @EventHandler
+    public void playerMount(PlayerInteractEntityEvent event) {
+        if(event.getRightClicked() instanceof Player) {
             event.getRightClicked().addPassenger(event.getPlayer());
         }
     }
@@ -88,12 +111,13 @@ public class MainListener implements Listener {
                 event.setCancelled(true);
             }
         }
+
     }
 
     @EventHandler
     public void playerDrop(PlayerDropItemEvent event) {
         if (StaticFlags.cinematic) event.setCancelled(true);
-        if(StaticLists.playerLock.contains(event.getPlayer())) {
+        if (StaticLists.playerLock.contains(event.getPlayer())) {
             event.setCancelled(true);
         }
     }
@@ -156,5 +180,11 @@ public class MainListener implements Listener {
             }.runTaskLater(plugin, 10);
 
         }
+    }
+
+    @EventHandler
+    public void playerBreakItemFrame(PlayerItemFrameChangeEvent event) {
+        if (event.getItemFrame().getWorld().getName().equals("world") && !event.getPlayer().isOp())
+            event.setCancelled(true);
     }
 }

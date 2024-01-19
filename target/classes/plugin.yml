@@ -110,3 +110,19 @@ commands:
     permission: op
   findmusic:
     description: Find music in list
+  setwaypoint:
+    permission: op
+  tuudance:
+    permission: op
+  playsidelight:
+    permission: op
+  hublightintruder:
+    permission: op
+  changeworld:
+    permission: op
+  intruderworld:
+    permission: op
+  openingplayer:
+    permission: op
+  lockserver:
+    permission: op

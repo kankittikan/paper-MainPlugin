@@ -1,5 +1,8 @@
 package me.oyashiz.serverplugin;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import me.oyashiz.serverplugin.commands.*;
 import me.oyashiz.serverplugin.listeners.*;
 import me.oyashiz.serverplugin.listeners.minigame.MinigamesTeleportListener;
@@ -15,9 +18,11 @@ import me.oyashiz.serverplugin.utils.ConfigReader;
 import me.oyashiz.serverplugin.utils.MapManager;
 import me.oyashiz.serverplugin.utils.StaticFlags;
 import me.oyashiz.serverplugin.utils.StaticLocations;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,6 +31,7 @@ import org.eclipse.sisu.launch.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public final class MainPlugin extends JavaPlugin {
     public static ConfigReader roleConfig;
@@ -146,6 +152,9 @@ public final class MainPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Auth(), this);
         getServer().getPluginManager().registerEvents(new HackListener(), this);
         getServer().getPluginManager().registerEvents(new EndPortalListener(), this);
+        getServer().getPluginManager().registerEvents(new WorldIntruderListener(), this);
+        getServer().getPluginManager().registerEvents(new HubLiftListener(), this);
+        getServer().getPluginManager().registerEvents(new AuthListener(), this);
 
         getCommand("sethome").setExecutor(new SetSpawnCommand(this));
         getCommand("geteffect").setExecutor(new GetEffectCommand());
@@ -199,6 +208,14 @@ public final class MainPlugin extends JavaPlugin {
         getCommand("controlplayer").setExecutor(new ControlPlayerCommand(this));
         getCommand("playscreen").setExecutor(new PlayScreenCommand());
         getCommand("findmusic").setExecutor(new FindMusicCommand());
+        getCommand("setwaypoint").setExecutor(new WaypointCommand());
+        getCommand("tuudance").setExecutor(new TuuDanceCommand());
+        getCommand("playsidelight").setExecutor(new PlaySideLightCommand());
+        getCommand("hublightintruder").setExecutor(new IntruderHubLightingCommand(this));
+        getCommand("changeworld").setExecutor(new ChangeWorldCommand());
+        getCommand("intruderworld").setExecutor(new IntruderWorldCommand());
+        getCommand("openingplayer").setExecutor(new PlayerOpeningCommand());
+        getCommand("lockserver").setExecutor(new LockJoinCommand());
 
         World worldCreator;
         worldCreator = new WorldCreator("world_fukie").createWorld();
@@ -206,7 +223,7 @@ public final class MainPlugin extends JavaPlugin {
         worldCreator = new WorldCreator("world_star").createWorld();
         worldCreator = new WorldCreator("world_speaka").createWorld();
         worldCreator = new WorldCreator("world_tester").createWorld();
-        worldCreator = new WorldCreator("world_b147").createWorld();
+        worldCreator = new WorldCreator("world_critical").createWorld();
 
         StaticFlags.performingLevel = getConfig().getInt("performing_level");
         resourcePack = getConfig().getString("resource_pack");
@@ -239,11 +256,6 @@ public final class MainPlugin extends JavaPlugin {
             }
         }.runTaskTimer(this, 0, 20);
 
-        Auth auth = new Auth();
-        for(Player p : Bukkit.getOnlinePlayers()) {
-            auth.doAuth(p);
-        }
-
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -251,6 +263,55 @@ public final class MainPlugin extends JavaPlugin {
                 getLogger().info("Loaded GravityControl");
             }
         }.runTaskLater(this, 20);
-    }
 
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (getServer().getTPS()[0] < 15) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.sendActionBar(ChatColor.RED + "[Server] Low tps : " + (int) getServer().getTPS()[0]);
+                    }
+                }
+                if (getServer().getTPS()[0] <= 10) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.sendMessage(ChatColor.RED + "[Server] Critical tps detection");
+                        p.teleport(new Location(Bukkit.getWorld("world_critical"), 0, 100, 0));
+                        p.setGameMode(GameMode.ADVENTURE);
+                        p.sendMessage(ChatColor.RED + "[Server] Please report to server admin");
+                    }
+                }
+                for(Player p : AuthListener.players) {
+                    Unirest.setTimeouts(0, 0);
+                    HttpResponse<String> response;
+                    try {
+                        response = Unirest.post(String.format("http://10.147.17.253:7071/grant?name=%s", p.getName())).asString();
+                    } catch (UnirestException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if(response.getBody().equals("OK")) {
+                        AuthListener.removePlayer(p);
+                    }
+                }
+            }
+        }.runTaskTimer(this, 0, 20);
+
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            Unirest.setTimeouts(0, 0);
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            HttpResponse<String> response;
+            try {
+                response = Unirest.post(String.format("http://10.147.17.253:7071/produce?name=%s&uuid=%s", p.getName(), uuid)).asString();
+            } catch (UnirestException e) {
+                throw new RuntimeException(e);
+            }
+            if (!response.getBody().equals("Already")) {
+                p.sendMessage(Component.newline());
+                p.sendMessage(Component.text("---------------------").color(TextColor.fromHexString("#F6ECA9")));
+                p.sendMessage(Component.text("คลิกลิงก์ด้านล่างเพื่อเข้าสู่ระบบ").color(TextColor.fromHexString("#F6ECA9")).appendNewline());
+                p.sendMessage(Component.text("-> https://sso-mc.doksakura.com").clickEvent(ClickEvent.clickEvent(ClickEvent.Action.OPEN_URL, "https://sso-mc.doksakura.com?uuid=" + uuid)).hoverEvent(HoverEvent.showText(Component.text("Click"))));
+                p.sendMessage(Component.text("---------------------").color(TextColor.fromHexString("#F6ECA9")).appendNewline());
+                AuthListener.addPlayer(p);
+            }
+        }
+    }
 }

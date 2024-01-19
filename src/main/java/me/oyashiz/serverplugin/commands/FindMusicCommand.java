@@ -36,11 +36,11 @@ public class FindMusicCommand implements CommandExecutor {
                 lines[0] = StringUtils.leftPad(lines[0], 6, "0");
                 if (lines.length == 2) {
                     TextComponent textComponent = new TextComponent(String.format("%s  by %s", lines[0], lines[1]));
-                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/gplay -t " + lines[0]));
+                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/gplay -t" + lines[0]));
                     records.add(textComponent);
                 } else {
                     TextComponent textComponent = new TextComponent(String.format("%s  %s  by %s", lines[0], lines[1], lines[2]));
-                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/gplay -t " + lines[0]));
+                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/gplay -t" + lines[0]));
                     records.add(textComponent);
                 }
             }
@@ -53,14 +53,15 @@ public class FindMusicCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (strings.length == 1) {
-            String query = strings[0];
+            String query = strings[0].replaceAll("-", " ");
+
             if(query.length() < 3) {
                 commandSender.sendMessage("fill out at least 3 character");
                 return false;
             }
             List<TextComponent> out = new ArrayList<>();
             for (TextComponent i : records) {
-                if (i.getText().contains(query)) out.add(i);
+                if (i.getText().contains(query.toString().toString())) out.add(i);
             }
 
             commandSender.sendMessage(String.format("Found %d songs", out.size()));

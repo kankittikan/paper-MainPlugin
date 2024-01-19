@@ -140,6 +140,10 @@ public class SurvivalListener implements Listener {
             player.teleport(home);
         }
 
+        if(location.equals(new Location(StaticLocations.survivalWorld, 58, 84, -14))) {
+            player.teleport(new Location(StaticLocations.survivalWorld, -795, 71, -440));
+        }
+
         if(location.equals(new Location(StaticLocations.survivalWorld, 176, 67, -20))) {
             player.sendMessage(" ");
             player.sendMessage("กดปุ่ม go home บนฐานปล่อยจรวจเพื่อไปพิกัดบ้าน");
